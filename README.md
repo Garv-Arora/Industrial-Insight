@@ -97,7 +97,6 @@ graph TD
     M --> N[Cloudflare + DNS]
     O[CI/CD (GitHub Actions + ArgoCD)] --> I
 
-
 ## 🏗️ Project Status: MVP Stage
 
 | Status | Description |
