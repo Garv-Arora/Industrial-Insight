@@ -78,31 +78,113 @@
 
 ---
 
-## 📊 Workflow Flowchart
+## 🔁 Full End-to-End Workflow for IE-Insight Chatbot
 
-```mermaid
-graph TD
-    A[User] --> B[Frontend (Next.js)]
-    B --> C[FastAPI Gateway]
-    C --> D[Chatbot Microservice]
-    C --> E[Metrics API / Logs API]
-    D --> F[Vector DB (Pinecone/Weaviate)]
-    D --> G[Fine-tuned LLM Model]
-    C --> H[API Gateway / Load Balancer]
-    H --> I[Kubernetes Cluster]
-    I --> J[Helm Deployed Services]
-    J --> K[Monitoring (Prometheus + Grafana)]
-    J --> L[Logging (ELK / Loki)]
-    I --> M[Terraform-Provisioned Infra]
-    M --> N[Cloudflare + DNS]
-    O[CI/CD (GitHub Actions + ArgoCD)] --> I
+This section details the complete development and deployment lifecycle of the Industrial Engineering Chatbot platform.
+
+---
+
+### 📦 Project Lifecycle Breakdown
+
+#### 1. **Planning & Design**
+- Define objectives, user base, and use-cases
+- Select tech stack (LLM, FastAPI, Docker, etc.)
+- Design chatbot architecture and API contracts
+
+#### 2. **Data Preparation**
+- Gather domain PDFs, books, Wikipedia dumps
+- Preprocess: Clean, chunk, embed
+- Store embeddings in Pinecone / Weaviate
+
+#### 3. **Chatbot Model Setup**
+- Build using Langchain / Haystack + FastAPI
+- Integrate fine-tuned OpenAI / LLaMA / HF model
+- Add memory/context management
+
+#### 4. **Backend API Development**
+- FastAPI endpoints: `/chat`, `/train`, `/deploy`, `/logs`, `/metrics`
+- Add OAuth2 / JWT-based RBAC (Auth0)
+- Integrate error handling and logging
+
+#### 5. **Frontend Development**
+- Build UI using Next.js / React
+- Add login, PDF upload, and real-time chat features
+- Connect securely to backend APIs
+
+#### 6. **Containerization & Infrastructure**
+- Dockerize all services
+- Write Helm charts for Kubernetes deployment
+- Provision infra using Terraform (EKS/GKE)
+
+#### 7. **CI/CD Automation**
+- GitHub Actions for build + push
+- ArgoCD / Flux for GitOps-style auto-deployments
+- Rollback mechanism on failed deploys
+
+#### 8. **Monitoring & Observability**
+- Use Prometheus + Grafana for metrics
+- ELK Stack or Loki for logs
+- Sentry for error tracking
+
+#### 9. **Security & Secrets Management**
+- HTTPS with Cloudflare
+- Store secrets in HashiCorp Vault / AWS Secrets Manager
+- JWT-based access control
+
+#### 10. **API Automation Layer**
+| Action | Endpoint |
+|--------|----------|
+| Deploy version | `POST /deploy` |
+| Upload PDF | `POST /train` |
+| Rotate secrets | `POST /rotate-secrets` |
+| Retrieve logs | `GET /logs?user_id=X` |
+| Metrics view | `GET /metrics` |
+
+#### 11. **Feedback Loop & Optimization**
+- Collect real-user feedback
+- Improve chatbot responses
+- Retrain on new data → redeploy via CI/CD
+
+#### 12. **Production-Readiness**
+- Fully API-controlled lifecycle
+- Independent microservices
+- Monitored, secure, and scalable
+- 99.9% uptime and rollback-ready
+
+#### 13. **Bonus & Future Scope**
+- Slack / Discord integration
+- AI-generated graphs/diagrams
+- ERP tools integration (SAP, Oracle)
+- Voice-mode chatbot
+
+---
+
+### ✅ Full Lifecycle Summary Table
+
+| Stage | Description |
+|-------|-------------|
+| 1. Plan | Goals, users, tools |
+| 2. Collect | Domain content |
+| 3. Build | Backend + chatbot |
+| 4. API | Full backend control |
+| 5. Frontend | Live app interface |
+| 6. Docker | Containerization |
+| 7. Infra | K8s, Terraform |
+| 8. CI/CD | GitHub Actions + ArgoCD |
+| 9. Observe | Prometheus, logs |
+| 10. Secure | Vault, Auth0 |
+| 11. Train | Vector DB + fine-tuning |
+| 12. Deploy | API-based rollout |
+| 13. Maintain | Logs, scale, retrain |
+
+---
 
 ## 🏗️ Project Status: MVP Stage
 
 | Status | Description |
 |--------|-------------|
-| ✅ | Base chatbot logic with PDF training |
-| ✅ | Kubernetes + GitHub Actions in place |
+| 🔄 | Base chatbot logic with PDF training |
+| 🔄 | Kubernetes + GitHub Actions in place |
 | 🔄 | Vector DB integration & LLM fine-tuning |
 | 🔄 | Production-level CI/CD testing |
 
