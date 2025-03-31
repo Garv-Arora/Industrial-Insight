@@ -78,6 +78,28 @@
 
 ---
 
+## 📊 Workflow Flowchart
+
+```mermaid
+graph TD
+  A[User] --> B[Frontend (Next.js)]
+  B --> C[FastAPI Gateway]
+  C --> D[Chatbot Microservice]
+  C --> E[Metrics API / Logs API]
+  D --> F[Vector DB (Pinecone/Weaviate)]
+  D --> G[Fine-tuned LLM Model]
+  C --> H[API Gateway / Load Balancer]
+  H --> I[Kubernetes Cluster]
+  I --> J[Helm Deployed Services]
+  J --> K[Monitoring (Prometheus + Grafana)]
+  J --> L[Logging (ELK / Loki)]
+  I --> M[Terraform-Provisioned Infra]
+  M --> N[Cloudflare + DNS]
+  O[CI/CD (GitHub Actions + ArgoCD)] --> I
+```
+
+---
+
 ## 🏗️ Project Status: MVP Stage
 
 | Status | Description |
