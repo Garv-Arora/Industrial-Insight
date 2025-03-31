@@ -80,75 +80,22 @@
 
 ## 📊 Workflow Flowchart
 
-+-------------------+
-|      User         |
-+--------+----------+
-         |
-         v
-+-------------------+
-| Frontend (Next.js)|
-+--------+----------+
-         |
-         v
-+-------------------+
-| FastAPI Gateway   |
-+--------+----------+
-         |
-         +----------------------------------+
-         |                                  |
-         v                                  v
-+-------------------+        +-----------------------------+
-| Chatbot Service   |        | Metrics & Logging API       |
-|  (Langchain, LLM) |        | (Prometheus, Grafana, ELK)  |
-+--------+----------+        +-----------------------------+
-         |
-         v
-+---------------------------+
-| Vector DB (Pinecone etc.)|
-+---------------------------+
-         |
-         v
-+--------------------------+
-| Fine-tuned LLM (HF, GPT)|
-+--------------------------+
-
-         |
-         v
-+-------------------------+
-| API Gateway / Ingress   |
-+-------------------------+
-         |
-         v
-+-------------------------+
-| Kubernetes Cluster      |
-+--------+----------------+
-         |
-         v
-+-------------------------+
-| Helm Deployed Services  |
-+--------+----------------+
-         |
-         +------------------------+
-         |                        |
-         v                        v
-+------------------+    +---------------------------+
-| Monitoring Stack |    | Logging Stack             |
-| (Prometheus etc.)|    | (ELK / Loki / Sentry)     |
-+------------------+    +---------------------------+
-
-         |
-         v
-+---------------------------+
-| Terraform Infra Provision |
-| (AWS, Cloudflare, DNS)    |
-+---------------------------+
-
-         ^
-         |
-+---------------------------+
-| CI/CD (GitHub Actions,    |
-| ArgoCD - GitOps Pipeline) |
-+---------------------------+
+```mermaid
+graph TD
+    A[User] --> B[Frontend (Next.js)]
+    B --> C[FastAPI Gateway]
+    C --> D[Chatbot Microservice]
+    C --> E[Metrics API / Logs API]
+    D --> F[Vector DB (Pinecone/Weaviate)]
+    D --> G[Fine-tuned LLM Model]
+    C --> H[API Gateway / Load Balancer]
+    H --> I[Kubernetes Cluster]
+    I --> J[Helm Deployed Services]
+    J --> K[Monitoring (Prometheus + Grafana)]
+    J --> L[Logging (ELK / Loki)]
+    I --> M[Terraform-Provisioned Infra]
+    M --> N[Cloudflare + DNS]
+    O[CI/CD (GitHub Actions + ArgoCD)] --> I
 
 
 ## 🏗️ Project Status: MVP Stage
